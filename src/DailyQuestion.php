@@ -17,12 +17,12 @@
 
         public function execute(InputInterface $input, OutputInterface $output)
         {
-            $command = $this->getApplication()->find('login');
-            $arguments = array(
-                'command' => 'login',
-            );
-            $greetInput = new ArrayInput($arguments);
-            $returnCode = $command->run($greetInput, $output);
+            // $command = $this->getApplication()->find('login');
+            // $arguments = array(
+            //     'command' => 'login',
+            // );
+            // $greetInput = new ArrayInput($arguments);
+            // $returnCode = $command->run($greetInput, $output);
                 $this -> saveMyDay($input, $output);
             
         }

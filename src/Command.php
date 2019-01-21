@@ -6,6 +6,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Database\Connection;
+use PDO;
 
 
 
@@ -98,7 +99,7 @@ class Command extends SymfonyCommand
                                             $time = Date("l jS \of F Y h:i:s");
                                             $filename = "log.txt";
                                             $file = fopen($filename, "a");
-                                            $what_to_write = '[' .$time. ']' . '-----' . $answer1 . '-----' . $answer2 . '-----' . $answer3 . '-----' . $answer4 . '-----' . $answer5 . '-----' . $answer6 .'-----' . $answer7 . "\n" ;
+                                            $what_to_write = '[' .$time. ']' . "\n" .'How is your day going: ' . $answer1 . "\n" . 'Work today: '. $answer2 . "\n" . 'About the day: ' . $answer3 . "\n" . 'Met someone new: ' . $answer4 . "\n" . 'Did you snap today: ' . $answer5 . "\n" . 'Amount Spent : ' .$answer6 ."\n" .'Meals had: ' . $answer7 . "\n". "\n". "\n" ;
                                             fwrite($file, $what_to_write);
                                             fclose($file);
                                             $conn = new Connection();
@@ -167,9 +168,15 @@ class Command extends SymfonyCommand
         }
     }
 
-    public function fetch_record(){
+    public function fetch_record(InputInterface $input, OutputInterface $output){
+        $time = $input -> getArgument('time');
+        $type = $input -> getArgument('type');
+
+        $conn = new Connection();
+        $results = $conn->fetch_record($type, $time);
         
-    }
+        $output->writeln($results);
+        }
 
     public function subtract(InputInterface $input, OutputInterface $output){
         $val1 = $input -> getArgument('val1');

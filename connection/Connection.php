@@ -52,12 +52,44 @@ use PDO;
             }
         }
 
-        public function fetch_record(){
-            $weekly_spending = "SELECT SUM(q6) FROM day order by id desc limit 7";
-            $monthly_spending = "SELECT SUM(q6) FROM day order by id desc limit 30";
+        public function fetch_record($type, $time){
 
-            $weekly_meal = "SELECT AVG(q7) FROM day order by id desc limit 7";
-            $monthly_meal = "SELECT AVG(q7) FROM day order by id desc limit 30";
+            if($type == 'spending'){
+                if($time == 'weekly'){
+                    $weekly_spending = "SELECT SUM(q6) FROM day order by id desc limit 7";
+                    $stmt1 = $this->db->prepare($weekly_spending);
+                    $stmt1->execute();
+                    return $stmt1->fetch();
+                }elseif($time == 'monthly'){
+                    $monthly_spending = "SELECT SUM(q6) FROM day order by id desc limit 30";
+                    $stmt2 = $this->db->prepare($monthly_spending);
+                    $stmt2->execute();
+                    return $stmt2->fetch();
+                }
+            }elseif($type == 'meal'){
+                if($time == 'weekly'){
+                    $weekly_meal = "SELECT AVG(q7) FROM day order by id desc limit 7";
+                    $stmt3 = $this->db->prepare($weekly_meal);
+                    $stmt3->execute();
+                    return $stmt3->fetch();
+                }elseif($time == 'monthly'){
+                    $monthly_meal = "SELECT AVG(q7) FROM day order by id desc limit 30";
+                    $stmt4 = $this->db->prepare($monthly_meal);
+                    $stmt4->execute();
+                    return $stmt4->fetch();
+                }
+            }
+
+            
+            
+
+            
+            
+
+            // $weekly_sleep = "SELECT AVG(q7) FROM day order by id desc limit 7";
+            // $monthly_sleep = "SELECT AVG(q7) FROM day order by id desc limit 30";
+
+
 
             
 
