@@ -79,21 +79,5 @@ use PDO;
                     return $stmt4->fetch();
                 }
             }
-
-            
-            
-
-            
-            
-
-            // $weekly_sleep = "SELECT AVG(q7) FROM day order by id desc limit 7";
-            // $monthly_sleep = "SELECT AVG(q7) FROM day order by id desc limit 30";
-
-
-
-            
-
         }
-
-
     }
